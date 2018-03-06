@@ -5,6 +5,6 @@
 (ql:quickload "cl-mysql")
 (use-package :cl-mysql)
 
-(setq db (connect :host "localhost" :user "wravel" :password "wravel" :database "easy3p_218"))
+(setq db (connect :host "localhost" :user "root" :password "root" :database "bdd"))
 
 (setq test (query "SELECT * FROM `easy_action`" :database db))
