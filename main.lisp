@@ -1,29 +1,32 @@
-;; Lecture-mysql http://www.obrezan.com/lisp/mysql/index.htm
-;; Lecture cl-mysql http://www.hackinghat.com/index.php/cl-mysql
-(load "/Users/user/quicklisp/setup.lisp")
-(ql:quickload "cl-mysql")
-(use-package :cl-mysql)
-(setq db (connect :host "localhost" :user "root" :password "root" :database "bdd"))
+;; TODO get user path + get pwd
+;; (pathname-name (user-homedir-pathname))
 
-(defun get-all-from-table ()
-  (query "SELECT * FROM `table`" :database db))
+;; Load dependencies files
+(load "/Users/wravel/quicklisp/setup.lisp")
+(ql:quickload "clsql")
 
-(defun get-query-fields (sql-query-result-list)
-  (car (cdr (car sql-query-result-list))))
+;; 
+(defparameter db-name "/Users/wravel/www/project_perso/wlhtml/databases/wlhtml.db")
 
-(defun get-query-body (sql-query-result-list)
-  (car (car sql-query-result-list)))
+;; Data base connecton
+(clsql:connect (list db-name) :database-type :sqlite3)
 
-(get-query-fields (get-all-from-table))
-(get-query-body (get-all-from-table))
+;; Helper
+(defun get-all-user ()
+  (clsql:query "SELECT * FROM country"))
 
-;; Connection avec clsql-sqlite3 en cours
-(ql:quickload "clsql-sqlite3")
-(use-package :clsql-sqlite3)
+;; Test
+(get-all-user)
 
-(defvar *db* (sqlite3:sqlite3-open "/Users/willahh/www/projects/wlhtml/databases/wlhtml.db"))
 
-;; (clsql-sqlite3:sqlite3-database:)
 
-;; todo ------->
-(clsql-sqlite3::database-query "SELECT * FROM `table`" *db* :auto :auto)
+
+
+
+
+
+
+
+
+
+
